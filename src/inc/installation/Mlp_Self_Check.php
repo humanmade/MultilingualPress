@@ -101,7 +101,16 @@ class Mlp_Self_Check {
 			$this->plugin_file
 		);
 
-		if ( $check->is_compliant() ) {
+		/**
+		 * Force install.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param bool $force_install Whether or not the installation should be forced.
+		 */
+		$force_install = (bool) apply_filters( 'multilingualpress.force_install', false );
+
+		if ( $check->is_compliant() || $force_install ) {
 			return self::INSTALLATION_CONTEXT_OK;
 		}
 
